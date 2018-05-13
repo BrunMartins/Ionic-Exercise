@@ -9,6 +9,7 @@ import { ApiProvider } from '../../providers/api/api';
 export class HomePage {
   users: any;
   page: number;
+  currentPage: number;
   //@ViewChild('title') title;
   
   constructor(public navCtrl: NavController, private api: ApiProvider, public navParams: NavParams, private toast: ToastController) { }
@@ -36,6 +37,7 @@ export class HomePage {
 			  this.users.push(user);
 			}
 		  }
+		  this.currentPage = this.page;
 	  })
 	  .catch((error: any) =>{
 	    if(error != undefined){
