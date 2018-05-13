@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component/*, ViewChild*/ } from '@angular/core';
 import { /*IonicPage,*/ NavController, NavParams, ToastController } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 
@@ -9,6 +9,7 @@ import { ApiProvider } from '../../providers/api/api';
 export class HomePage {
   users: any;
   page: number;
+  //@ViewChild('title') title;
   
   constructor(public navCtrl: NavController, private api: ApiProvider, public navParams: NavParams, private toast: ToastController) { }
 
@@ -21,10 +22,12 @@ export class HomePage {
     this.api.getAll(page)
 	  .then((result: any) =>{
 		  if(result.length == 0){
-			let toaster = this.toast.create({message: "Sem resultados para a página" + page + ". A voltar à página "+ page - 1, position: "bottom", duration: 3000});
+			let toaster = this.toast.create({message: "Sem resultados para a página " + this.page, position: "bottom", duration: 1500});
 			toaster.present();
 			this.page--;
-			console.log(this.page);
+			this.getAllUsers(this.page);
+		  } else if(this.page == 0) {
+		   	this.page = 1;
 			this.getAllUsers(this.page);
 		  } else {
 		    this.users = [];
@@ -33,11 +36,10 @@ export class HomePage {
 			  this.users.push(user);
 			}
 		  }
-			console.log("User List: " + this.users);
 	  })
 	  .catch((error: any) =>{
 	    if(error != undefined){
-	      let toaster = this.toast.create({message: "Erro ao listar utilizadores Erro: " + error, position: "bottom", duration: 3000});
+	      let toaster = this.toast.create({message: "Erro ao listar utilizadores Erro: " + error, position: "bottom", duration: 2000});
 	      toaster.present();
 		}
 	  });
@@ -50,7 +52,7 @@ export class HomePage {
 		toaster.present();
 	  })
 	  .catch((error: any) => {
-		 let toaster = this.toast.create({message: "Erro ao listar utilizador Erro: " + error, position: "bottom", duration: 3000});
+		 let toaster = this.toast.create({message: "Erro ao listar utilizador Erro: " + error, position: "bottom", duration: 2000});
          toaster.present();
 	  });	
   }
