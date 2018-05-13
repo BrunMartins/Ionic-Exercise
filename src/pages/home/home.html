@@ -1,14 +1,32 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Utilizadores
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-list>
+	<ion-item sliding *ngFor="let user of users">
+	  <ion-item (click)="openUser(user.id)">
+		<ion-avatar item-start>
+		  <img src="{{user.avatar}}"/>
+		</ion-avatar>
+		<h2>{{user.first_name}} {{user.last_name}}</h2>
+	  </ion-item>
+	</ion-item>
+  </ion-list>  
 </ion-content>
+<ion-footer>
+   <ion-grid>
+	  <ion-row>
+		<ion-col col-6>
+		  <button ion-button full (click)="prevPage()">Página Anterior</button>
+		</ion-col>
+		<ion-col col-6>
+		  <button ion-button full (click)="nextPage()">Página Seguinte</button>
+		</ion-col>
+	  </ion-row>
+	</ion-grid>
+</ion-footer>
