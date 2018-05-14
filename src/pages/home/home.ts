@@ -22,7 +22,7 @@ export class HomePage {
     this.api.getAll(page)
 	  .then((result: any) =>{
 		  if(result.length == 0){
-				let toaster = this.toast.create({message: "Sem resultados para a página " + this.page, position: "bottom", duration: 1500});
+				let toaster = this.toast.create({message: "Sem resultados para a página " + this.page, position: "bottom", duration: 1500, cssClass: "toasts"});
 				toaster.present();
 				this.page--;
 				this.getAllUsers(this.page);
@@ -39,7 +39,7 @@ export class HomePage {
 	  })
 	  .catch((error: any) =>{
 	    if(error != undefined){
-	      let toaster = this.toast.create({message: "Erro ao listar utilizadores Erro: " + error, position: "bottom", duration: 2000});
+	      let toaster = this.toast.create({message: "Erro ao listar utilizadores Erro: " + error, position: "bottom", duration: 2000, cssClass: "toasts"});
 	      toaster.present();
 			}
 	  });
@@ -48,11 +48,11 @@ export class HomePage {
   openUser(id: number){
     this.api.get(id)
 			.then((result: any) => {
-				let toaster = this.toast.create({message: result.first_name + " " + result.last_name, position: "top", duration: 3000});
+				let toaster = this.toast.create({message: result.first_name + " " + result.last_name, position: "top", duration: 3000, cssClass: "toasts"});
 				toaster.present();
 			})
 			.catch((error: any) => {
-				let toaster = this.toast.create({message: "Erro ao listar utilizador Erro: " + error, position: "bottom", duration: 2000});
+				let toaster = this.toast.create({message: "Erro ao listar utilizador Erro: " + error, position: "bottom", duration: 2000, cssClass: "toasts"});
 				toaster.present();
 			});	
   }
