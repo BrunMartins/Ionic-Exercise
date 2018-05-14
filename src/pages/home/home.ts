@@ -22,7 +22,7 @@ export class HomePage {
     this.api.getAll(page)
 	  .then((result: any) =>{
 		  if(result.length == 0){
-				let toaster = this.toast.create({message: "Sem resultados para a página " + this.page, position: "bottom", duration: 1500, cssClass: "toasts"});
+				let toaster = this.toast.create({message: "Sem resultados para a página " + this.page, position: "middle", duration: 1500, cssClass: "toasts"});
 				toaster.present();
 				this.page--;
 				this.getAllUsers(this.page);
